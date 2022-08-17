@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\MyData\UserController;
+use App\Http\Controllers\MyData\RolesController;
+use App\Http\Controllers\MyData\DepartmentsController;
+use App\Http\Controllers\MyData\ProgramsController;
+use App\Http\Controllers\MyData\StudentsController;
 use App\Http\Controllers\MyData\HomeController;
 use App\Http\Controllers\MyData\MessagesController;
 use App\Http\Controllers\MyData\ChangePasswordController;
@@ -35,13 +39,19 @@ Route::get('/financeHome', [App\Http\Controllers\HomeController::class, 'finance
 Route::get('/librarianHome', [App\Http\Controllers\HomeController::class, 'libindex'])->name('librarianHome');
 Route::get('/studentHome', [App\Http\Controllers\HomeController::class, 'studentindex'])->name('studentHome');
 
-//Login Routes
+//Login View Routes
 Route::get('/hodLogin', [App\Http\Controllers\MyData\UserController::class, 'login']);
-Route::get('/registrarLogin', [App\Http\Controllers\MyData\UserController::class, 'login']);
-Route::get('/financeLogin', [App\Http\Controllers\MyData\UserController::class, 'login']);
-Route::get('/roLogin', [App\Http\Controllers\MyData\UserController::class, 'login']);
-Route::get('/librarianLogin', [App\Http\Controllers\MyData\UserController::class, 'login']);
-Route::get('/studentLogin', [App\Http\Controllers\MyData\UserController::class, 'login']);
+Route::get('/registrarLogin', [App\Http\Controllers\MyData\UserController::class, 'registrarLogin']);
+Route::get('/financeLogin', [App\Http\Controllers\MyData\UserController::class, 'financeLogin']);
+Route::get('/roLogin', [App\Http\Controllers\MyData\UserController::class, 'recordsLogin']);
+Route::get('/librarianLogin', [App\Http\Controllers\MyData\UserController::class, 'librarianLogin']);
+Route::get('/studentLogin', [App\Http\Controllers\MyData\UserController::class, 'studentLogin']);
+
+//Login Routes
 
 Route::resource('users', UserController::class);
+Route::resource('roles', RolesController::class);
+Route::resource('departments', DepartmentsController::class);
+Route::resource('programs', ProgramsController::class);
+Route::resource('students', StudentsController::class);
 Route::post('users/{user}/change-password',[ChangePasswordController::class, 'change_password'])->name('users.change.password');

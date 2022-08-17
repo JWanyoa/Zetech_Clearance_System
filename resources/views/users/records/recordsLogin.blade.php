@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Records Officer Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="">
+                    <form method="POST" action="{{route('login')}}">
                         @csrf
 
                         <div class="row mb-3">
@@ -16,6 +16,7 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input type="hidden" value="5" name="role_id">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="icon" href="{!! asset('images/logo.jpg') !!}"/>
     <title>{{ config('app.name', 'Zetech University CMS') }} | Home</title>
 
     <!-- Custom fonts for this template-->
@@ -536,6 +537,10 @@ left: 35%;
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar  static-top shadow">
 
+                <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{url('images/logo.jpg')}}" class="img img-responsive " width="50px" height="60px"> {{ config('app.name', 'Zetech University CMS') }}
+                </a>
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -587,14 +592,14 @@ left: 35%;
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <a class="nav-link" href="{{url('/register') }}">
                                 <i class="fas fa-sign-up-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Register
                             </a>
                         </li>
 
                     </ul>
-
+                </div>
                 </nav>
 
             </div>

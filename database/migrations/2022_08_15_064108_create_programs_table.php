@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id('program_id');
             $table->string('program_name');
+            $table->string('program_code');
             $table->string('program_type');
             $table->foreignId('department_id')->constrained();
             /* For Creating Current Timestamp */

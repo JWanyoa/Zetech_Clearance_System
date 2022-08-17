@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Departments;
+
+use App\Models\Student;
 
 class HomeController extends Controller
 {
@@ -23,7 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $approved = 'Approved';
+        $students = Student::all();
+        $studentsApproved = Student::where('status_of_graduation','LIKE',"%{$approved}%")->get();
+        $studNumber = $students->count();
+        $studApprovedNumber = $studentsApproved->count();
+        return view('home',compact('students','studentsApproved','studNumber','studApprovedNumber'));
     }
 
     public function welcome()
@@ -33,6 +41,7 @@ class HomeController extends Controller
 
     public function hodindex()
     {
+        $departments = Departments::all();
         return view('users.hod.home');
     }
 

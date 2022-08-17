@@ -1,12 +1,18 @@
 @extends('layouts.main')
 
 @section('content')
-
-<div class="container">
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Add Users</h1>
+</div>
+<div class="container mb-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Create New User') }}</div>
+                <div class="card-header">
+                    <i class="fas fa-user-plus"></i>&nbsp
+                    {{ __('Create New User') }}
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('users.store') }}">
@@ -89,13 +95,13 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="department_id" class="col-md-4 col-form-label text-md-end">{{ __('School') }}</label>
+                            <label for="department_id" class="col-md-4 col-form-label text-md-end">{{ __('School/Department') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control @error('department_id') is-invalid @enderror" name="department_id" value="{{ old('department_id') }}" required>
+                                <select class="form-control @error('department_id') is-invalid @enderror" name="department_id" required>
                                     <option>--SELECT--</option>
                                     @foreach($departments as $department)
-                                    <option value="{{$department->id}}">{{$department->department_name}}</option>
+                                    <option value="{{ $department->department_id }}">{{$department->department_name}}</option>
                                     @endforeach
                                 </select>
                                 @error('department_id')

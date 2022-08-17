@@ -15,14 +15,17 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id('student_id');
+            $table->string('user_name');
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
             $table->string('email');
             $table->string('national_id');
+            $table->string('phone');
             $table->foreignId('program_id')->constrained();
+            $table->foreignId('department_id')->constrained();
             $table->string('status_of_graduation')->default('not approved');
-            $table->string('HOD_remarks');
+            $table->string('HOD_remarks')->nullable();
             /* For Creating Current Timestamp */
             $table->timestamp('created_at')->useCurrent();
             /* For Updating */

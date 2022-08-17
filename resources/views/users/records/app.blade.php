@@ -11,7 +11,7 @@
     <meta name="author" content="">
 
     <link rel="icon" href="{!! asset('images/logo.jpg') !!}"/>
-    <title>{{ config('app.name', 'Zetech University CMS') }} | Registrar Dashboard</title>
+    <title>{{ config('app.name', 'Zetech University CMS') }} | Records Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -33,7 +33,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('/registrarHome')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('/hodHome')}}">
                 <div class="sidebar-brand-icon">
                     <img src="{{url('images/logo.jpg')}}" width="50px" height="50px">
                 </div>
@@ -45,7 +45,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{url('/registrarHome')}}">
+                <a class="nav-link" href="{{url('/hodHome')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -133,7 +133,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="img-profile rounded-circle"
                                     src="{{url('images/undraw_profile.svg')}}">&nbsp 
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->first_name.' '.Auth::user()->last_name  (<i class="fas fa-user-secret"></i> Registrar)span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->first_name.' '.Auth::user()->last_name }} (<i class="fas fa-address-book-o"></i> Records officer)</span>
                                 
                             </a>
                             <!-- Dropdown - User Information -->

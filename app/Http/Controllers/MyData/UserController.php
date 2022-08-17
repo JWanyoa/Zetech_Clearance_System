@@ -92,7 +92,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
-        return view('users.edit', compact('user'));
+        $departments = Departments::all();
+        return view('users.edit', compact('user','departments'));
     }
 
 
@@ -149,6 +150,7 @@ class UserController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'role_id' => $request->role_id,
+            'department_id' => $request->department_id,
         ]);
 
         return redirect()->route('users.index')->with('message', 'User Details Successfully Updated');

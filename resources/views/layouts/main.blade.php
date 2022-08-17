@@ -10,7 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard</title>
+    <link rel="icon" href="{!! asset('images/logo.jpg') !!}"/>
+    <title>{{ config('app.name', 'Zetech University CMS') }} | Admin Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -102,18 +103,19 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>User Management</span>
+                    <span>System Management</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Details:</h6>
-                        <a class="collapse-item" href="{{route('users.index')}}">Users</a>
-                        <a class="collapse-item" href="{{url('/register')}}">Roles</a>
-                        <a class="collapse-item" href="{{url('/forgot-password')}}">Permissions</a>
+                        <h6 class="collapse-header">User Details:</h6>
+                        <a class="collapse-item" href="{{route('users.index')}}"><i class="fas fa-users"></i> &nbspUsers</a>
+                        <a class="collapse-item" href="{{route('roles.index')}}"><i class="fas fa-user-secret"></i> &nbspRoles</a>
+                        <a class="collapse-item" href="{{url('/forgot-password')}}"><i class="fas fa-lock"></i> &nbspPermissions</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="{{url('/404')}}">404 Page</a>
-                        <a class="collapse-item" href="{{url('/blank')}}">Blank Page</a>
+                        <a class="collapse-item" href="{{route('departments.index')}}"><i class="fas fa-building"></i> &nbspSchools/Departments</a>
+                        <a class="collapse-item" href="{{route('programs.index')}}"><i class="fas fa-tasks"></i> &nbspPrograms</a>
+                        <a class="collapse-item" href="{{route('students.index')}}"><i class="fas fa-graduation-cap"></i> &nbspStudents</a>
                     </div>
                 </div>
             </li>
@@ -261,9 +263,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->first_name.' '.Auth::user()->last_name }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{url('images/undraw_profile.svg')}}">
+                                <img class="img-profile rounded-circle" src="{{url('images/undraw_profile.svg')}}"> &nbsp
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->first_name.' '.Auth::user()->last_name }} (<i class="fas fa-lock"></i> Admin)</span>
+                                
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -338,8 +340,8 @@
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session. This will sign you out of the system. Proceed?</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}"
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary btn-sm" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" >
                                                      <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -379,17 +381,5 @@
 </html>
 
 @else
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card alert alert-warning">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    Please login to access the system
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<script>window.location = "./";</script>
 @endif
