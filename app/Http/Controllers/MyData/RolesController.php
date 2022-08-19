@@ -5,6 +5,9 @@ namespace App\Http\Controllers\MyData;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\RolesStoreRequest;
+use App\Http\Requests\RolesUpdateRequest;
+
 use App\Models\Roles;
 
 class RolesController extends Controller
@@ -14,10 +17,13 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $roles = Roles::paginate(10);
+        $roles = Roles::paginate(5);
+        if($request->has('search')){
+            $roles = Roles::where('role_name','like', "%{$request->search}%")->paginate(5);
+        }
         return view('roles.index', compact('roles'));
     }
 
@@ -39,9 +45,15 @@ class RolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RolesStoreRequest $request)
     {
         //
+        //Save user data
+        Roles::create([
+            'role_name' => $request->role_name,
+        ]);
+
+        return redirect()->route('roles.index')->with('message', 'User Successfully Created');
     }
 
     /**
@@ -61,10 +73,10 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Roles $roles)
+    public function edit(Roles $role)
     {
         //
-        return view('roles.edit', compact('roles'));
+        return view('roles.edit', compact('role'));
     }
 
     /**
@@ -74,10 +86,13 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Roles $roles)
+    public function update(RolesUpdateRequest $request, Roles $role)
     {
         //
-        return view('roles.update');
+        $role->update([
+            'role_name' => $request->role_name,
+        ]);
+        return redirect()->route('roles.index')->with('message', 'Role Successfully Updated');
     }
 
     /**
@@ -86,8 +101,11 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Roles $role)
     {
-        //
+        ////Deleting Data
+        if($role->delete()){
+            return redirect()->route('roles.index')->with('message', 'Role Deleted Successfully'); 
+        }
     }
 }

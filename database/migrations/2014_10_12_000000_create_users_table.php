@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('user_name');
-            $table->foreignId('role_id')->contrained()->default('1');
-            $table->foreignId('department_id')->contrained()->default('0');
+            $table->foreignId('role_id')->constrained()->default('1');
+            $table->foreignId('department_id')->constrained()->default('0');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

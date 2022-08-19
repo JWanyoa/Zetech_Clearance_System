@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DepartmentStoreRequest extends FormRequest
+class RolesStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class DepartmentStoreRequest extends FormRequest
     {
         return [
             //
-            'department_name' => ['required', 'string', 'max:255','unique:departments'],
+            'role_name' => ['required', 'string', 'max:255','unique:roles'],
         ];
     }
 }

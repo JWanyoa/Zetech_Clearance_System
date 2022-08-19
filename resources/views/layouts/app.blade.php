@@ -25,15 +25,21 @@
     <div id="content">
 
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar  static-top shadow mb-4 py-2">
-<div class="container">
-    <a class="navbar-brand" href="{{ url('/') }}">
-        <img src="{{url('images/logo.jpg')}}" class="img img-responsive " width="50px" height="65px"> {{ config('app.name', 'Zetech University CMS') }}
-    </a>
-    <!-- Sidebar Toggle (Topbar) -->
-    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+<nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+
+<div class="container-fluid ml-2 mr-2">
+
+<!-- Sidebar Toggle (Topbar) -->
+<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
+
+
+
+<a class="navbar-brand" href="{{ url('/') }}">
+    <img src="{{url('images/logo.jpg')}}" class="img img-responsive " width="50px" height="60px"> {{ config('app.name', 'Zetech University CMS') }}
+</a> 
+    
 
     
 
@@ -41,54 +47,54 @@
     <ul class="navbar-nav ml-auto">
         <!-- Nav Item - User Information -->
         <li class="nav-item mt-2 mr-2">
-            <a class="btn btn-primary btn-sm" href="{{ url('/') }}"><i class="fas fa-arrow-left"></i> &nbsp{{ __('Back to Home') }}</a>
+            <a class="btn btn-primary btn-sm d-none" href="{{ url('/') }}"><i class="fas fa-arrow-left"></i> &nbsp{{ __('Back to Home') }}</a>
         </li>
-
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-400">Login As</span>
+                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-dark"></i>
+                <span class="mr-2 d-none d-lg-inline text-dark">Login As</span>
             </a>
             <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-0"
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-4"
                 aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="{{url('login')}}">
-                    <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-lock fa-sm fa-fw mr-2 text-dark-800"></i>
                     Admin
                 </a>
                 <a class="dropdown-item" href="{{url('/hodLogin')}}">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-dark-800"></i>
                     HOD
                 </a>
                 <a class="dropdown-item" href="{{url('/registrarLogin')}}">
-                    <i class="fas fa-list-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-list-alt fa-sm fa-fw mr-2 text-dark-800"></i>
                     Registrar
                 </a>
                 <a class="dropdown-item" href="{{url('/financeLogin')}}">
-                    <i class="fas fa-credit-card fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-credit-card fa-sm fa-fw mr-2 text-dark-800"></i>
                     Finance Officer
                 </a>
                 <a class="dropdown-item" href="{{url('/roLogin')}}">
-                    <i class="fa fa-address-book fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fa fa-address-book fa-sm fa-fw mr-2 text-dark-800"></i>
                     Records Officer
                 </a>
                 <a class="dropdown-item" href="{{url('/librarianLogin')}}">
-                    <i class="fas fa-book fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-book fa-sm fa-fw mr-2 text-dark-800"></i>
                     Librarian
                 </a>
                 <a class="dropdown-item" href="{{url('/studentLogin')}}">
-                    <i class="fas fa-user-circle  fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-user-circle  fa-sm fa-fw mr-2 text-dark-800"></i>
                     Student
                 </a>
             </div>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{url('/register') }}">
-                <i class="fas fa-sign-up-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Register
+        <!-- <li class="nav-item">
+            <a class="nav-link text-dark" href="{{url('/register') }}">
+                <i class="fas fa-user-plus fa-sm fa-fw mr-2 text-dark"></i>
+                <span class="mr-2 d-none d-lg-inline text-dark">Register</span>
             </a>
-        </li>
+        </li> -->
 
     </ul>
 </div>
@@ -99,6 +105,15 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#table').DataTable();
+        } );
+    </script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 
      <!-- Bootstrap core JavaScript-->
      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

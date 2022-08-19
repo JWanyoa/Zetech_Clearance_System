@@ -89,30 +89,16 @@
 
                             <div class="col-md-6">
                                 <select class="form-control @error('role_id') is-invalid @enderror" name="role_id" required>
-                                    <option value="{{ old('role_id', $user->role_id) }}">
-                                        @if(($user->role_id) == "1")
-                                        {{'Administrator'}}
-                                        @elseif(($user->role_id) == "2")
-                                        {{'HOD'}}
-                                        @elseif(($user->role_id) == "3")
-                                        {{'Registrar'}}
-                                        @elseif(($user->role_id) == "4")
-                                        {{'Finance Officer'}}
-                                        @elseif(($user->role_id) == "5")
-                                        {{'Records Officer'}}
-                                        @elseif(($user->role_id) == "6")
-                                        {{'Librarian'}}
-                                        @else
-                                        {{'Student'}}
-                                        @endif
-                                    </option>
-                                    <option value="1">Administrator</option>
-                                    <option value="2">HOD</option>
-                                    <option value="3">Registrar</option>
-                                    <option value="4">Finance Officer</option>
-                                    <option value="5">Records Officer</option>
-                                    <option value="6">Librarian</option>
-                                    <option value="7">Student</option>
+                                    @foreach($roles as $role)
+                                    @if($user->role_id == $role->role_id)
+                                        <option value="{{ $role->role_id }}"> {{ $role->role_name }}</option>
+                                        @break
+                                    @endif
+                                    @endforeach
+
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->role_id }}"> {{$role->role_name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('role_id')
                                     <span class="invalid-feedback" role="alert">
@@ -126,12 +112,20 @@
                             <label for="department_id" class="col-md-4 col-form-label text-md-end">{{ __('School/Department') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control @error('department_id') is-invalid @enderror" name="department_id" required>
-                                <option>
-                                    Select a Department...
-                                </option>
+                            <select class="form-control @error('department_id') is-invalid @enderror" name="department_id" required>
                                     @foreach($departments as $department)
-                                    <option value="{{ $department->department_id }}">{{$department->department_name}}</option>
+                                    @if($user->department_id == '0')
+                                        <option>Select Department...</option>
+                                        @break
+                                    @endif
+                                    @if($user->department_id == $department->department_id)
+                                        <option value="{{ $department->department_id }}"> {{ $department->department_name }}</option>
+                                        @break
+                                    @endif
+                                    @endforeach
+
+                                    @foreach($departments as $department)
+                                        <option value="{{ $department->department_id }}"> {{ $department->department_name }}</option>
                                     @endforeach
                                 </select>
                                 @error('department_id')

@@ -1,9 +1,9 @@
-@extends('layouts.main')
+@extends('users.hod.app')
 
 @section('content')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Add Graduating Student
+    <h1 class="h3 mb-0 text-gray-800">Add Graduating Student for {{ $department->department_name }}</h1>
 </div>
 <div class="container-fluid mb-4">
     <div class="row justify-content-center">
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('students.store') }}">
+                    <form method="POST" action="{{ route('students.saveStudent') }}">
                         @csrf
 
                         <div class="row">
@@ -128,20 +128,10 @@
                             <label for="department_id" class="col-form-label text-md-end">{{ __('School/Department') }}</label>
 
                             <div class="">
-                                <select class="form-control @error('department_id') is-invalid @enderror" name="department_id" required>
-                                    <option>--SELECT--</option>
-                                    @foreach($departments as $department)
-                                    <option value="{{ $department->department_id }}">{{$department->department_name}}</option>
-                                    @endforeach
-                                </select>
-                                @error('department_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input type="text" class="form-control @error('department_id') is-invalid @enderror"  value="{{ $department->department_name }}" disabled>
+                                <input type="hidden" name="department_id" value="{{ $department->department_id }}">
                             </div>
                         </div>
-
 
 
                         <div class="col-md-4 mb-3">

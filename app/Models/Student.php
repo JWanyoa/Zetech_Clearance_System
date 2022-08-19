@@ -12,6 +12,8 @@ class Student extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'student_id';
+
     protected $fillable = [
         'user_name',
         'first_name',
@@ -22,6 +24,9 @@ class Student extends Model
         'phone',
         'department_id',
         'program_id',
+        'admissionNumber',
+        'yearOfAdmission',
+        'guardianPhone',
     ];
 
     public function programs()

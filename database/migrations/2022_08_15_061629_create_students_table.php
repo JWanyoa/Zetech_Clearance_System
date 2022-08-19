@@ -22,10 +22,15 @@ return new class extends Migration
             $table->string('email');
             $table->string('national_id');
             $table->string('phone');
+            $table->string('guardianPhone');
+            $table->string('admissionNumber');
+            $table->string('yearOfAdmission');
             $table->foreignId('program_id')->constrained();
+            $table->string('confirmed')->default('not confirmed');
             $table->foreignId('department_id')->constrained();
             $table->string('status_of_graduation')->default('not approved');
-            $table->string('HOD_remarks')->nullable();
+            $table->string('created_by')->default('0');
+            $table->string('signed')->default('0');
             /* For Creating Current Timestamp */
             $table->timestamp('created_at')->useCurrent();
             /* For Updating */

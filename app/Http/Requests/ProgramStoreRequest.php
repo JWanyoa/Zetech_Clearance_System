@@ -25,8 +25,8 @@ class ProgramStoreRequest extends FormRequest
     {
         return [
             //
-            'program_name' => ['required', 'string', 'max:255'],
-            'program_code' => ['required', 'string', 'max:4'],
+            'program_name' => ['required', 'string', 'max:255','unique:programs'],
+            'program_code' => ['required', 'string', 'max:4','unique:programs'],
             'program_type' => ['required', 'string', 'max:255'],
             'department_id' => ['required', 'integer', 'max:255'],
         ];

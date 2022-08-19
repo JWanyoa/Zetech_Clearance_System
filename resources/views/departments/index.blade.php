@@ -21,34 +21,32 @@
         </div>
     </div>
 
-    <div class=" container">
+    <div class=" container-fluid">
         <div class="card mx-auto">
             <div class="card-header">
-                <div class="row">
-                    <div class="col-md-3">
-                        <i class="fas fa-building"></i>
-                        &nbsp Schools/Departments
-                    </div>
-                    <div class="col-md-5">
-                        <form method="GET" action="{{route('departments.index')}}" class="form-inline">
-                            @csrf
-                            <div class="form-group mx-sm-3 mb-2">
-                                <input type="search" placeholder="Search role" name="search" class="form-control form-control-sm"/>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sm mb-2"><i class="fas fa-search"></i> &nbsp{{ __('Search') }}</button>
-                        </form>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="{{route('departments.create')}}" class="btn btn-primary btn-sm float-right">
-                            <i class="fas fa-plus-square"></i>
-                            &nbsp Create New department
-                        </a>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <i class="fas fa-list-ol"></i>
+                            &nbsp Schools/Departments
+                        </div>
+                        <div class="col-md-5 d-flex align-items-center justify-content-center">
+                            <form method="GET" action="{{route('departments.index')}}" class="form-inline">
+                                @csrf
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <input type="search" placeholder="Search department" name="search" class="form-control form-control-sm"/>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm mb-2"><i class="fas fa-search"></i> &nbsp{{ __('Search') }}</button>
+                            </form> &nbsp
+                            <a href="{{route('departments.create')}}" class="btn btn-primary btn-sm mb-2">
+                                <i class="fas fa-user-plus"></i>
+                                &nbsp <span class="d-none d-lg-inline ">Add New Department</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-body">
-            <table class="table table-hover">
+            <div class="card-body table-responsive">
+            <table id="table" class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
                 <th scope="col">ID</th>
@@ -62,11 +60,23 @@
                     <th scope="row">{{$department->department_id}}</th>
                     <td>{{$department->department_name}}</td>
                     <td scope="col-2">
-                        <a href="{{route('departments.edit', $department->department_id)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>&nbsp Edit Details</a>&nbsp
-                        <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>&nbsp Delete Details</a>
+                        <a href="{{route('departments.edit', $department->department_id)}}" class="btn btn-info btn-sm">
+                            <i class="fas fa-edit"></i>
+                            &nbsp Edit Details
+                        </a>&nbsp
+                        <form method="POST" action="{{route('departments.destroy', $department->department_id)}}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
+                @if($departments->isEmpty())
+                    <tr>
+                        <td colspan="4"><div class="alert alert-danger">No Record Found</div></td>
+                    </tr>
+                @endif
             </tbody>
             </table>
             <div class="d-flex justify-content-center">

@@ -1,11 +1,13 @@
-@extends('layouts.main')
+@extends('users.hod.app')
 
 @section('content')
 <!-- Dropdown - Messages -->
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Students</h1>
+    <h1 class="h3 mb-0 text-gray-800">
+        Confirmed Students Names
+    </h1>
 </div>
 <div class="row mb-4">
     <div class="justify-content-center mx-auto">
@@ -25,28 +27,29 @@
         <div class="card mx-auto">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-7">
-                        <i class="fas fa-list-ol"></i>
-                        &nbsp All Students
+                    <div class="col-md-6">
+                        <i class="fas fa-thumbs-up"></i>
+                        &nbsp Confirmed Students for
+                        @foreach($departments as $department)
+                        @if(Auth::User()->department_id == $department->department_id)
+                            {{ $department->department_name }}
+                        @endif
+                        @endforeach
                     </div>
-                    <div class="col-md-5 d-flex align-items-center justify-content-center">
-                        <form method="GET" action="{{route('students.index')}}" class="form-inline">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <form method="GET" action="{{route('users.hod.nameConfirm', Auth::User()->department_id)}}" class="form-inline">
                             @csrf
                             <div class="form-group mx-sm-3 mb-2">
-                                <input type="search" placeholder="Search student" name="search" class="form-control form-control-sm"/>
+                                <input type="search" placeholder="Search list by Student Name" name="search" class="form-control form-control-sm"/>
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm mb-2"><i class="fas fa-search"></i> &nbsp{{ __('Search') }}</button>
-                        </form> &nbsp
-                        <a href="{{route('students.create')}}" class="btn btn-primary btn-sm mb-2">
-                            <i class="fas fa-user-plus"></i>
-                            &nbsp <span class="d-none d-lg-inline ">Add New student</span>
-                        </a>
+                        </form>
                     </div>
                 </div>
             </div>
-            
 
-            <div class="card-body table-responsive">
+            <div class="card-body">
             <table class="table table-hover table-stripped table-bordered" " id="table">
             <thead>
                 <tr>
@@ -59,11 +62,13 @@
                 <th scope="col">Program</th>
                 <th scope="col">Program Code</th>
                 <th scope="col">Status of Graduation</th>
+                <th scope="col">HOD Remarks</th>
                 <th scope="col-2">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($students as $student)
+                @foreach($allStudents as $student)
+                @if($student->confirmed == 'confirmed' && Auth::User()->department_id == $student->department_id)
                 <tr>
                     <th scope="row">{{$student->student_id}}</th>
                     <td>{{$student->first_name}}</td>
@@ -81,21 +86,10 @@
                             </td>
                             @endif
                         @endforeach
-                    <td>
-                        @if($student->status_of_graduation == 'approved')
-                        <button class="btn btn-success btn-sm">
-                            <i class="fas fa-check"></i>
-                            &nbsp{{ strtoupper($student->status_of_graduation) }}
-                        </button>
-                        @else
-                        <button class="btn btn-danger btn-sm">
-                            <i class="fas fa-times"></i>
-                            &nbsp{{ strtoupper($student->status_of_graduation) }}
-                        </button>
-                        @endif
-                    </td>
+                    <td>{{$student->status_of_graduation }}</td>
+                    <td>{{$student->HOD_remarks }}</td>
                     <td scope="col-2"> 
-                        <div class="d-flex justify-contents-center">
+                        <div class="d-flex juustify-contents-center">
                             <a href="{{route('students.edit', $student->student_id)}}" class="btn btn-info btn-sm">
                                 <i class="fas fa-edit"></i>
                             </a> &nbsp
@@ -107,16 +101,17 @@
                         </div>
                     </td>
                 </tr>
+                @endif
                 @endforeach
-                @if($students->isEmpty())
+                @if($allStudents->isEmpty())
                     <tr>
-                        <td colspan="12"><div class="alert alert-danger">No Record Found</div></td>
+                        <td colspan="11"><div class="alert alert-danger">No Students have confirmed Names Yet</div></td>
                     </tr>
                 @endif
             </tbody>
             </table>
             <div class="d-flex justify-content-center">
-                {{ $students->links('pagination::bootstrap-5') }}
+                {{ $allStudents->links('pagination::bootstrap-5') }}
             </div>
             </div>
         </div>

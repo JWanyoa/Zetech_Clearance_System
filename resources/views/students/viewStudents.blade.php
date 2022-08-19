@@ -26,8 +26,8 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-7">
-                        <i class="fas fa-list-ol"></i>
-                        &nbsp All Students
+                        <i class="fas fa-graduation-cap"></i>
+                        &nbsp All Candidate Students
                     </div>
                     <div class="col-md-5 d-flex align-items-center justify-content-center">
                         <form method="GET" action="{{route('students.index')}}" class="form-inline">
@@ -39,15 +39,15 @@
                         </form> &nbsp
                         <a href="{{route('students.create')}}" class="btn btn-primary btn-sm mb-2">
                             <i class="fas fa-user-plus"></i>
-                            &nbsp <span class="d-none d-lg-inline ">Add New student</span>
+                            &nbsp <span class="d-none d-lg-inline ">Add New Student</span>
                         </a>
                     </div>
                 </div>
             </div>
-            
 
             <div class="card-body table-responsive">
-            <table class="table table-hover table-stripped table-bordered" " id="table">
+                
+            <table id="table" class="table table-sm table-hover table-stripped table-bordered" cellspacing="0">
             <thead>
                 <tr>
                 <th scope="col">Student ID</th>
@@ -56,6 +56,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">National ID</th>
+                <th scope="col">Admission Number</th>
                 <th scope="col">Program</th>
                 <th scope="col">Program Code</th>
                 <th scope="col">Status of Graduation</th>
@@ -71,6 +72,7 @@
                     <td>{{$student->last_name}}</td>
                     <td>{{$student->email}}</td>
                     <td>{{$student->national_id }}</td>
+                    <td>{{$student->admissionNumber }}</td>
                         @foreach($programs as $program)
                             @if($student->program_id == $program->program_id)
                             <td>
@@ -81,19 +83,7 @@
                             </td>
                             @endif
                         @endforeach
-                    <td>
-                        @if($student->status_of_graduation == 'approved')
-                        <button class="btn btn-success btn-sm">
-                            <i class="fas fa-check"></i>
-                            &nbsp{{ strtoupper($student->status_of_graduation) }}
-                        </button>
-                        @else
-                        <button class="btn btn-danger btn-sm">
-                            <i class="fas fa-times"></i>
-                            &nbsp{{ strtoupper($student->status_of_graduation) }}
-                        </button>
-                        @endif
-                    </td>
+                    <td>{{$student->status_of_graduation }}</td>
                     <td scope="col-2"> 
                         <div class="d-flex justify-contents-center">
                             <a href="{{route('students.edit', $student->student_id)}}" class="btn btn-info btn-sm">
@@ -110,16 +100,21 @@
                 @endforeach
                 @if($students->isEmpty())
                     <tr>
-                        <td colspan="12"><div class="alert alert-danger">No Record Found</div></td>
+                        <td colspan="12"><div class="alert alert-danger">No Students Added Yet</div></td>
                     </tr>
                 @endif
             </tbody>
             </table>
-            <div class="d-flex justify-content-center">
-                {{ $students->links('pagination::bootstrap-5') }}
             </div>
+            <div class="d-flex justify-content-center text-center">
+                {{ $students->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
 @endsection

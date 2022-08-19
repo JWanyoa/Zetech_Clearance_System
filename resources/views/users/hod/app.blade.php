@@ -62,13 +62,14 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-comments"></i>
+                    <i class="fas fa-list-ol"></i>
                     <span>Student List</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Senate List Details:</h6>
-                        <a class="collapse-item" href="{{url('/viewApprovedStudents')}}">View Approved Students</a>
+                        <h6 class="collapse-header">Student List Details:</h6>
+                        <a class="collapse-item" href="{{url('/viewAll')}}">View All Students</a>
+                        <a class="collapse-item" href="{{url('/approvedStudents')}}">View Approved Students</a>
                     </div>
                 </div>
             </li>
@@ -84,7 +85,9 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Graduation List:</h6>
-                        <a class="collapse-item" href="{{url('/nameConfirmation')}}">Name Confirmation</a>
+                        <a class="collapse-item" href="{{route('users.hod.createList', Auth::user()->department_id)}}">Prepare Graduation List</a>
+                        <a class="collapse-item" href="{{route('users.hod.graduationList', Auth::user()->department_id)}}">Graduation List</a>
+                        <a class="collapse-item" href="{{route('users.hod.nameConfirm', Auth::user()->department_id)}}">Name Confirmation</a>
                         <a class="collapse-item" href="{{url('/signList')}}">Sign Graduation List</a>
                     </div>
                 </div>
@@ -205,8 +208,8 @@
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session. This will sign you out of the system. Proceed?</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}"
+                    <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary btn-sm" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" >
                                                      <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

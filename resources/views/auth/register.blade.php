@@ -73,6 +73,7 @@
                             <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('User Role') }}</label>
 
                             <div class="col-md-6">
+                                <input type="hidden" name="department_id" value="0">
                                 <select class="form-control @error('role_id') is-invalid @enderror" name="role_id" required>
                                     <option>--SELECT--</option>
                                     <option value="1">Administrator</option>

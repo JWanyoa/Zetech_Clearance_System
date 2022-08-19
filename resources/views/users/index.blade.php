@@ -20,7 +20,7 @@
             @endif
         </div>
     </div>
-    <div class=" container">
+    <div class=" container-fluid">
         <div class="card mx-auto">
             <div class="card-header">
                 <div class="row">
@@ -44,7 +44,7 @@
             </div>
 
             <div class="card-body">
-            <table class="table table-hover">
+            <table class="table table-hover table-stripped table-bordered" " id="table">
             <thead>
                 <tr>
                 <th scope="col">User ID</th>
@@ -52,6 +52,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">User Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Department</th>
                 <th scope="col">Role ID</th>
                 <th scope="col">User Role</th>
                 <th scope="col-2">Action</th>
@@ -65,27 +66,47 @@
                     <td>{{$user->last_name}}</td>
                     <td>{{$user->user_name}}</td>
                     <td>{{$user->email}}</td>
+                    <td>
+                        @foreach($departments as $department)
+                        @if($user->department_id == '0')
+                            Administrator
+                            @break
+                        @endif
+                        @if($user->department_id == $department->department_id)
+                        {{$department->department_name}}
+                        @endif
+                        @endforeach
+                    </td>
                     <td>{{$user->role_id}}</td>
                     <td>
-                        @if($user->role_id == '1')
-                        <div class="btn btn-primary btn-sm" role="alert">{{'Administrator'}}</div>
-                        @elseif($user->role_id == '2')
-                        <div class="btn btn-dark btn-sm" role="alert">{{'HOD'}}</div>
-                        @elseif($user->role_id == '3')
-                        <div class="btn btn-success btn-sm" role="alert">{{'Registrar'}}</div>
-                        @elseif($user->role_id == '4')
-                        <div class="btn btn-secondary btn-sm" role="alert">{{'Finance Officer'}}</div>
-                        @elseif($user->role_id == '5')
-                        <div class="btn btn-danger btn-sm" role="alert">{{'Records Officer'}}</div>
-                        @elseif($user->role_id == '6')
-                        <div class="btn btn-warning btn-sm" role="alert">{{'Librarian'}}</div>
-                        @elseif($user->role_id == '7')
-                        <div class="btn btn-info btn-sm" role="alert">{{'Student'}}</div>
-                        @endif              
+                        @foreach($roles as $role)
+                        @if($user->role_id == $role->role_id)
+                            @if($role->role_id == '1')
+                                <div class="btn btn-primary">{{ $role->role_name }}</div>
+                            @elseif($role->role_id == '2')
+                                <div class="btn btn-info">{{ $role->role_name }}</div>
+                            @elseif($role->role_id == '3')
+                                <div class="btn btn-warning">{{ $role->role_name }}</div>
+                            @elseif($role->role_id == '4')
+                                <div class="btn btn-danger">{{ $role->role_name }}</div>
+                            @elseif($role->role_id == '5')
+                                <div class="btn btn-dark">{{ $role->role_name }}</div>
+                            @elseif($role->role_id == '6')
+                                <div class="btn btn-secondary">{{ $role->role_name }}</div>
+                            @else
+                                <div class="btn btn-success">{{ $role->role_name }}</div>
+                            @endif
+                        @endif
+                        @endforeach
                     </td>
                     <td scope="col-2"><a href="{{route('users.edit', $user->id)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>&nbsp Edit User Details</a></td>
                 </tr>
                 @endforeach
+                @if($users->isEmpty())
+                    <tr>
+                        <td colspan="12"><div class="alert alert-danger">No Users Added Yet</div></td>
+                    </tr>
+                @endif
             </tbody>
             </table>
             <div class="d-flex justify-content-center">

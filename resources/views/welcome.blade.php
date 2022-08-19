@@ -535,68 +535,70 @@ left: 35%;
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar  static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
 
-                <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{url('images/logo.jpg')}}" class="img img-responsive " width="50px" height="60px"> {{ config('app.name', 'Zetech University CMS') }}
-                </a>
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <div class="container-fluid ml-2 mr-2">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    
 
+
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{url('images/logo.jpg')}}" class="img img-responsive " width="50px" height="60px"> {{ config('app.name', 'Zetech University CMS') }}
+                </a> 
+                    
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                <span class="mr-2 d-none d-lg-inline text-gray-400">Login As</span>
+                                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-dark"></i>
+                                <span class="mr-2 d-none d-lg-inline text-dark">Login As</span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-0"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="{{url('login')}}">
-                                    <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-lock fa-sm fa-fw mr-2 text-dark-800"></i>
                                     Admin
                                 </a>
                                 <a class="dropdown-item" href="{{url('/hodLogin')}}">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-dark-800"></i>
                                     HOD
                                 </a>
                                 <a class="dropdown-item" href="{{url('/registrarLogin')}}">
-                                    <i class="fas fa-list-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-list-alt fa-sm fa-fw mr-2 text-dark-800"></i>
                                     Registrar
                                 </a>
                                 <a class="dropdown-item" href="{{url('/financeLogin')}}">
-                                    <i class="fas fa-credit-card fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-credit-card fa-sm fa-fw mr-2 text-dark-800"></i>
                                     Finance Officer
                                 </a>
                                 <a class="dropdown-item" href="{{url('/roLogin')}}">
-                                    <i class="fa fa-address-book fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fa fa-address-book fa-sm fa-fw mr-2 text-dark-800"></i>
                                     Records Officer
                                 </a>
                                 <a class="dropdown-item" href="{{url('/librarianLogin')}}">
-                                    <i class="fas fa-book fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-book fa-sm fa-fw mr-2 text-dark-800"></i>
                                     Librarian
                                 </a>
                                 <a class="dropdown-item" href="{{url('/studentLogin')}}">
-                                    <i class="fas fa-user-circle  fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-user-circle  fa-sm fa-fw mr-2 text-dark-800"></i>
                                     Student
                                 </a>
                             </div>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url('/register') }}">
-                                <i class="fas fa-sign-up-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Register
+                        <!-- <li class="nav-item">
+                            <a class="nav-link text-dark" href="{{url('/register') }}">
+                                <i class="fas fa-user-plus fa-sm fa-fw mr-2 text-dark"></i>
+                                <span class="mr-2 d-none d-lg-inline text-dark">Register</span>
                             </a>
-                        </li>
+                        </li> -->
 
                     </ul>
                 </div>
@@ -610,33 +612,38 @@ left: 35%;
                 <div class="carousel-item active">
                     <img src="{{url('images/img1.jpg')}}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>It is a long established </h5>
-                        <h2> fact that a reader distracted</h2>
-                        <a href="#0" class="btn btn-info">MORE INFO</a>
+                        <h2 class="text-primary"> Graduation Clearance Made Easy</h2>
+                        <div class="">
+                            <a href="#0" class="btn btn-primary">GET MORE INFO</a>
+                        </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="{{url('images/img2.jpg')}}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                       <h5>It is a long established </h5>
-                        <h2> fact that a reader distracted</h2>
-                        <a href="#0" class="btn btn-info">MORE INFO</a>
+                        <h2 class="text-primary"> Graduate Happily</h2>
+                        <div class="">
+                            <a href="#0" class="btn btn-primary">GET MORE INFO</a>
+                        </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="{{url('images/img3.jpg')}}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                       <h5>It is a long established </h5>
-                        <h2> fact that a reader distracted</h2>
-                        <a href="#0" class="btn btn-info">MORE INFO</a>
+                        <h2 class="text-primary"> Clear in peace</h2>
+                        <div class="">
+                            <a href="#0" class="btn btn-primary">GET MORE INFO</a>
+                        </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="{{url('images/img4.jpg')}}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                       <h5>It is a long established </h5>
-                        <h2> fact that a reader distracted</h2>
-                        <a href="#0" class="btn btn-info">MORE INFO</a>
+                       <!--<h5>It is a long established </h5>-->
+                        <h2 class="text-primary"> Easy Clearance</h2>
+                        <div class="">
+                            <a href="#0" class="btn btn-primary">GET MORE INFO</a>
+                        </div>
                     </div>
                 </div>
 
@@ -652,14 +659,13 @@ left: 35%;
             </a>
         </div>
         <section class="home__form">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="home__form-container text-center">
                     <h3>Get In Touch</h3>
                     <p>Please get in touch with our support team and expect a response within 24 working hours.</p>
                     <form>
                         <div class="row">
-                            <div class="col">
-
+                            <div class="col-sm-3">
                                 <div class="form-group">
 
                                     <div class="input-box ">
@@ -668,7 +674,7 @@ left: 35%;
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <div class="input-box ">
                                         <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="Email" aria-label="email" aria-describedby="email">
@@ -676,7 +682,9 @@ left: 35%;
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+
+                            <!--
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <div class="input-box ">
                                         <input type="text" class="form-control" placeholder="Phone" aria-label="phone" aria-describedby="phone">
@@ -684,7 +692,9 @@ left: 35%;
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+
+                            -->
+                            <div class="col-sm-3">
 
                                 <div class="form-group">
                                     <div class="input-box ">
@@ -692,7 +702,7 @@ left: 35%;
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2"><button type="submit" class="btn btn-danger btn-sm">Submit Now!</button></div>
+                            <div class="col-sm-3"><button type="submit" class="btn btn-danger btn-sm">Submit Now!</button></div>
                         </div>
 
                     </form>

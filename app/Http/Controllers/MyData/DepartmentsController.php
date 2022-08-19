@@ -5,6 +5,8 @@ namespace App\Http\Controllers\MyData;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\DepartmentStoreRequest;
+
 use App\Models\Departments;
 
 class DepartmentsController extends Controller
@@ -14,10 +16,13 @@ class DepartmentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $departments = Departments::paginate(5);
+        if($request->has('search')){
+            $departments = Departments::where('department_name','like', "%{$request->search}%")->paginate(20);
+        }
         return view('departments.index', compact('departments'));
     }
 
@@ -38,7 +43,7 @@ class DepartmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartmentStoreRequest $request)
     {
         //
         //Save Program data
@@ -66,9 +71,10 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Departments $department)
     {
         //
+        return view('departments.edit', compact('department'));
     }
 
     /**
@@ -78,9 +84,13 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartmentStoreRequest $request, Departments $department)
     {
         //
+        $department->update([
+            'department_name' => $request->department_name,
+        ]);
+        return redirect()->route('departments.index')->with('message', 'Department Successfully Updated');
     }
 
     /**
@@ -89,8 +99,11 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Departments $department)
     {
-        //
+        //Deleting Data
+        if($department->delete()){
+            return redirect()->route('departments.index')->with('message', 'Department Deleted Successfully'); 
+        }
     }
 }

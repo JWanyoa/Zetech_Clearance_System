@@ -11,6 +11,8 @@ class Departments extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'department_id';
+
     protected $fillable = ['department_name'];
 
     public function programs()

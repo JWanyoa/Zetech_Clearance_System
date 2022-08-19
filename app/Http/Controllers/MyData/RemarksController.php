@@ -2,31 +2,23 @@
 
 namespace App\Http\Controllers\MyData;
 
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\ProgramStoreRequest;
+use App\Http\Requests\RemarksStoreRequest;
 
-use App\Models\Program;
-use App\Models\Departments;
+use App\Models\Remarks;
 
-class ProgramsController extends Controller
+class RemarksController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        $programs = Program::paginate(5);
-        $departments = Departments::paginate(5);
-        if($request->has('search')){
-            $programs = Program::where('program_name','like', "%{$request->search}%")->paginate(20);
-        }
-        return view('programs.index', compact('programs','departments'));
     }
 
     /**
@@ -37,9 +29,6 @@ class ProgramsController extends Controller
     public function create()
     {
         //
-        $programs = Program::paginate(5);
-        $departments = Departments::paginate(5);
-        return view('programs.create', compact('programs','departments'));
     }
 
     /**
@@ -48,17 +37,9 @@ class ProgramsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProgramStoreRequest $request)
+    public function store(Request $request)
     {
-        //Save Program data
-        Program::create([
-            'program_name' => $request->program_name,
-            'program_code' => $request->program_code,
-            'program_type' => $request->program_type,
-            'department_id' => $request->department_id,
-        ]);
-
-        return redirect()->route('programs.index')->with('message', 'Program Successfully Added');
+        //
     }
 
     /**
@@ -101,11 +82,11 @@ class ProgramsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Program $program)
+    public function destroy(Remarks $remark)
     {
         //Deleting Data
-        if($program->delete()){
-            return redirect()->route('programs.index')->with('message', 'Program Deleted Successfully'); 
+        if($remark->delete()){
+            return redirect()->route('users.hod.index')->with('message', 'Remark Deleted Successfully'); 
         }
     }
 }

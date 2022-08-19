@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+use App\Models\Departments;
+
 class LoginController extends Controller
 {
     /*
@@ -52,11 +54,13 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
+        $departments = Departments::all();
         if(auth()->attempt(array('email' => $inputVal['email'], 'password' => $inputVal['password'], 'role_id' => $inputVal['role_id']))){
             if (auth()->user()->role_id == 1) {
                 return redirect()->route('home');
             }elseif(auth()->user()->role_id == 2){
-                return redirect()->route('hodHome');
+                return redirect()->route('hodHome', compact('departments'));
             }elseif(auth()->user()->role_id == 3){
                 return redirect()->route('registrarHome');
             }elseif(auth()->user()->role_id == 4){

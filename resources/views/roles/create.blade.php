@@ -12,6 +12,7 @@
                 <div class="card-header">
                 <i class="fas fa-user-secret"></i>&nbsp
                     {{ __('Add New Role') }}
+                    <a href="{{url()->previous()}}" class="float-right btn btn-primary btn-sm"><i class="fas fa-arrow-left"></i> Go Back</a>
                 </div>
 
                 <div class="card-body">

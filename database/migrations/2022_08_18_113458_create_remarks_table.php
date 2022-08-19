@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('programs', function (Blueprint $table) {
-            $table->id('program_id');
-            $table->string('program_name')->unique();
-            $table->string('program_code')->unique();
-            $table->string('program_type');
-            $table->foreignId('department_id')->constrained();
+        Schema::create('remarks', function (Blueprint $table) {
+            $table->id();
+            $table->string('remark', 1000);
+            $table->integer('user_id')->constrained();
+            $table->string('remark_to');
+            $table->string('issue');
             /* For Creating Current Timestamp */
             $table->timestamp('created_at')->useCurrent();
             /* For Updating */
@@ -33,7 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-
-        Schema::dropIfExists('programs');
+        Schema::dropIfExists('remarks');
     }
 };

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Messages;
 use App\Models\Departments;
 use App\Models\Roles;
+use App\Models\Program;
 
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -24,11 +25,13 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::paginate(10);
+        $roles = Roles::all();
         $messages = Messages::all();
+        $departments = Departments::all();
         if($request->has('search')){
-            $users = User::where('user_name','like', "%{$request->search}%")->orWhere('email','like', "%{$request->search}%")->paginate(10);
+            $users = User::where('user_name','like', "%{$request->search}%")->orWhere('email','like', "%{$request->search}%")->paginate(20);
         }
-        return view('users.index', compact('users','messages'));
+        return view('users.index', compact('users','messages','roles','departments'));
     }
 
     /**
@@ -58,18 +61,32 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        //Save user data
-        User::create([
-            'user_name' => $request->user_name,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'role_id' => $request->role_id,
-            'department_id' => $request->department_id,
-            'password' => Hash::make($request->password),
-        ]);
 
-        return redirect()->route('users.index')->with('message', 'User Successfully Created');
+        //Another Way of Saving to prevent Duplicate Data As in the rules in UserStoreRequest File
+        // $user = User::firstOrNew([
+        //     'user_name' => $request->user_name,
+        //     'first_name' => $request->first_name,
+        //     'last_name' => $request->last_name,
+        //     'email' => $request->email,
+        //     'role_id' => $request->role_id,
+        //     'department_id' => $request->department_id,
+        //     'password' => Hash::make($request->password),
+        // ]);
+
+        // $user->save();
+
+        //Save user data
+            User::create([
+                'user_name' => $request->user_name,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'role_id' => $request->role_id,
+                'department_id' => $request->department_id,
+                'password' => Hash::make($request->password),
+            ]);
+
+            return redirect()->route('users.index')->with('message', 'User Successfully Created');
     }
 
     /**
@@ -93,13 +110,14 @@ class UserController extends Controller
     {
         //
         $departments = Departments::all();
-        return view('users.edit', compact('user','departments'));
+        $roles = Roles::all();
+        return view('users.edit', compact('user','departments','roles'));
     }
 
 
     public function login()
     {
-        //
+        //        
         return view('users.hod.hodLogin');
     }
 
@@ -142,7 +160,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UserUpdateRequest $request, User $user)
-    {
+    { 
         //
         $user->update([
             'user_name' => $request->user_name,

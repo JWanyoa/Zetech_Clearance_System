@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $approved = 'Approved';
         $students = Student::all();
-        $studentsApproved = Student::where('status_of_graduation','LIKE',"%{$approved}%")->get();
+        $studentsApproved = Student::where('status_of_graduation','LIKE',"{$approved}%")->get();
         $studNumber = $students->count();
         $studApprovedNumber = $studentsApproved->count();
         return view('home',compact('students','studentsApproved','studNumber','studApprovedNumber'));
@@ -42,7 +42,9 @@ class HomeController extends Controller
     public function hodindex()
     {
         $departments = Departments::all();
-        return view('users.hod.home');
+        $students = Student::all();
+        $approved = Student::where('status_of_graduation','=','approved');
+        return view('users.hod.home', compact('departments','students','approved'));
     }
 
     public function registrarindex()
